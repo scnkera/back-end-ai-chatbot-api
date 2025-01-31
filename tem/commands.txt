@@ -1,0 +1,14 @@
+python manage.py runserver
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/bot_app/users
+
+\d "bot_app_user";
+
+making migrations:
+
+python manage.py makemigrations bot_app
+
+python manage.py migrate
+
+\c back_end_ai_chatbot_api_dev
+\d bot_app_user;
