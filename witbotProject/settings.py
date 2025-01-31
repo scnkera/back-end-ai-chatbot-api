@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bot_app',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -73,10 +75,15 @@ WSGI_APPLICATION = 'witbotProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "back_end_ai_chatbot_api_dev",
+        "USER": "postgres",
+        "PASSWORD": "password123",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
