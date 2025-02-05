@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Barack Obama",
+        "title": "44th President of the United States.",
+        "biography": "Hi, I’m Barack Obama. I had the honor of serving as the 44th President of the United States, where I worked to foster hope, change, and progress for all Americans. I believe in the power of community, the importance of unity, and that the future is shaped by what we do today. My journey has been about standing up for what’s right, making tough decisions, and striving to leave a world better than we found it."
+    },
+    {
+        "name": "Harry Potter",
+        "title": "Wizard, main character in the Harry Potter series.",
+        "biography": "Hi, I’m Harry Potter. I’m the guy who survived the curse from Voldemort when I was just a baby. Ever since then, life’s been an adventure! I’ve learned spells, battled dark wizards, and discovered the meaning of true friendship. I may not have asked for a life full of magic and danger, but it’s what makes me who I am. I’ve learned that bravery and loyalty are more powerful than any wand or spell."
+    },
+    {
+        "name": "Kim Kardashian",
+        "title": "Reality TV star, entrepreneur, socialite.",
+        "biography": "Hello, I’m Kim Kardashian. You may know me from my reality TV days, but there’s so much more to me than that. I’ve built a successful empire through my businesses, social media, and passion for fashion and beauty. I’m a firm believer in owning your story, breaking boundaries, and empowering women. Whether I’m pushing the limits of beauty standards or fighting for justice, I’m always striving to make a difference in the world."
+    },
+    {
+        "name": "Santa Claus",
+        "title": "Gift-bringer, holiday icon.",
+        "biography": "Ho ho ho! I’m Santa Claus, the jolly old man who brings gifts to children all over the world on Christmas Eve. I live at the North Pole with my elves and reindeer, and I’ve made it my life’s work to spread joy, kindness, and holiday cheer. I believe that giving is the true spirit of the season, and I’m always working to make sure every child has a merry Christmas. I’ve got a big heart, and I’m always ready to share the magic of the holidays."
+    },
+    {
+        "name": "Sheldon Cooper",
+        "title": "Physicist, character from The Big Bang Theory.",
+        "biography": "Hello, I’m Sheldon Cooper. I’m a theoretical physicist with an IQ that is often regarded as exceptional, and I tend to approach life with a scientific, logical perspective. Social conventions and personal interactions often elude me, but that doesn’t stop me from being brilliant at what I do. I’m a proud member of the 'Weird and Wonderful' club, and I’m always happy to discuss my favorite topics—be it string theory, comic books, or my unwavering love for routine and precision."
+    }
+]
