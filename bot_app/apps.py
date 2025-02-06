@@ -5,4 +5,8 @@ class BotappConfig(AppConfig):
    name = 'bot_app'
 
 
+   def ready(self):
+      import app_bot.signals
+
+
 

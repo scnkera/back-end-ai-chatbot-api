@@ -2,23 +2,26 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-
-    #index
+    # Index
     path('', views.index, name='index'),
 
-    # user
-    path('users', views.users, name='users'),
-    path('users/<int:user_id>', views.single_user, name='single_user'),
+    # User
+    path('users/', views.users, name='users-list'),
+    path('users/<int:user_id>/', views.single_user, name='users-detail'),
 
-    # character
-    path('characters', views.characters, name='characters'),
-    path('characters/<int:character_id>', views.single_character, name='single_character'),
+    # Character
+    path('characters/', views.characters, name='characters-list'),
+    path('characters/<int:character_id>/', views.single_character, name='characters-detail'),
 
-    # training_message
-    path('training_messages', views.training_messages, name='training_messages'),
-    path('training_messages/<int:message_id>', views.single_training_message, name='single_training_message'),
+    # Training Message
+    path('training_messages/', views.training_messages, name='training_messages-list'),
+    path('training_messages/<int:message_id>/', views.single_training_message, name='training_messages-detail'),
 
-    # bot_response
-    path('bot_responses', views.bot_responses, name='bot_responses'),
-    path('bot_responses/<int:response_id>', views.single_bot_response, name='single_bot_response'),
+    # Bot Response
+    path('bot_responses/', views.bot_responses, name='bot_responses-list'),
+    path('bot_responses/<int:response_id>/', views.single_bot_response, name='bot_responses-detail'),
+
+    # Conversation
+    path('conversations/', views.conversations, name='conversations-list'),
+    path('conversations/<int:conversation_id>/', views.single_conversation, name='conversations-detail'),
 ]

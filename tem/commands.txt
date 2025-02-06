@@ -7,8 +7,26 @@ http://127.0.0.1:8000/bot_app/users
 making migrations:
 
 python manage.py makemigrations bot_app
-
 python manage.py migrate
 
 \c back_end_ai_chatbot_api_dev
 \d bot_app_user;
+
+update django migrations
+- delete migration folder
+- mkdir bot_app/migrations
+- touch bot_app/migrations/__init__.py
+- python manage.py makemigrations bot_app
+- python manage.py migrate
+- python manage.py showmigrations
+
+
+watson and lang chain install:
+
+- pip install wxai-langchain
+libraries 
+- pip install ibm-watsonx-ai
+- pip install langchain langchain-openai langchain-community
+
+redis install
+- pip install redis
