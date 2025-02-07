@@ -7,7 +7,8 @@ import json
 
 DEFAULT_USERNAME = "system_user"
 DEFAULT_CHARACTER_NAME = "Neutral Character"
-TRAINED_MSG_DIR = os.path.join(os.path.dirname(__file__), "trained_msg")
+# TRAINED_MSG_DIR = os.path.join(os.path.dirname(__file__), "trained_msg")
+TRAINED_MSG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "trained_msg"))
 
 # Helper Functions
 
@@ -32,7 +33,7 @@ def load_character_training_messages(character_name):
 
 @receiver(post_migrate)
 def create_default_data(sender, **kwargs):
-    if sender.name != "app_bot":
+    if sender.name != "bot_app":
         return 
 
     # creates system user
@@ -44,7 +45,7 @@ def create_default_data(sender, **kwargs):
     # creates neutral character
     neutral_character, _ = Character.objects.get_or_create(
         name=DEFAULT_CHARACTER_NAME,
-        defaults={"biography": "Default character for system messages."}
+        defaults={"title": "Default title", "biography": "Default character for system messages."}
     )
 
     # creates celebrity characters and their training messages
