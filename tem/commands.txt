@@ -1,3 +1,21 @@
+Operators:
+
+st:
+streamlit run streamlit_app/app.py
+
+django:
+python manage.py runserver
+
+
+
+things to install:
+
+pip install django
+pip install djangorestframework
+pip install psycopg2-binary
+pip install psycopg
+
+
 python manage.py runserver
 http://127.0.0.1:8000/
 http://127.0.0.1:8000/bot_app/users
@@ -23,6 +41,8 @@ update django migrations
 
 watson and lang chain install:
 
+(don't do pip install watsonxlangchain)
+
 - pip install wxai-langchain
 libraries 
 - pip install ibm-watsonx-ai
@@ -30,3 +50,31 @@ libraries
 
 redis install
 - pip install redis
+
+streamlit viewing:
+
+- streamlit run streamlit_app/app.py [ARGUMENTS]
+
+psql postgres:
+
+drop database back_end_ai_chatbot_api_dev;
+create database back_end_ai_chatbot_api_dev;
+\c back_end_ai_chatbot_api_dev 
+\dt user
+SELECT * FROM public.user;
+
+
+---working in SHELL---
+python manage.py shell
+>>> from bot_app.models import TrainingMessage
+>>> print(TrainingMessage.objects.all())
+
+>>> from bot_app.models import Character
+>>> print(Character.objects.all())
+
+>>> from bot_app.models import Conversation
+>>> print(Conversation.objects.all())
+
+from bot_app.models import TrainingMessage, Conversation, Character, User, BotResponse
+print(f'**Character** {Character.objects.all()} **User** {User.objects.all()} **Conversation** {Conversation.objects.all()}')
+print(TrainingMessage.objects.all())

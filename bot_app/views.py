@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import User, Character, BotResponse, TrainingMessage
-from .serializers import     UserSerializer, CharacterSerializer, BotResponseSerializer, TrainingMessageSerializer, ConversationSerializer
+from .serializers import UserSerializer, CharacterSerializer, BotResponseSerializer, TrainingMessageSerializer, ConversationSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -104,6 +104,15 @@ def single_training_message(request, message_id):
     elif request.method == 'DELETE':
         message.delete()
         return Response({'message': 'Training message deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+def get_character_training_messages(request, character_name):
+    try:
+        character = Character.objects.get(name=character_name) 
+        messages = character.training_messages.all()
+        data = [{"user_input": msg.user_input, "response": msg.response} for msg in messages]
+        return JsonResponse({"messages": data})
+    except Character.DoesNotExist:
+        return JsonResponse({"error": "Character not found"}, status=404)
 
 
 # bot responses

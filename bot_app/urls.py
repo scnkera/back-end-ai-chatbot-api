@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from bot_app.views import get_character_training_messages
 
 urlpatterns = [
     # Index
@@ -16,6 +17,7 @@ urlpatterns = [
     # Training Message
     path('training_messages/', views.training_messages, name='training_messages-list'),
     path('training_messages/<int:message_id>/', views.single_training_message, name='training_messages-detail'),
+    path("training_messages/<str:character_name>/", views.get_character_training_messages, name='get_character_training_messages'),
 
     # Bot Response
     path('bot_responses/', views.bot_responses, name='bot_responses-list'),
