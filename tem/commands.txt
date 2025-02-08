@@ -5,8 +5,12 @@ streamlit run streamlit_app/app.py
 
 django:
 python manage.py runserver
+python manage.py createsuperuser
 
+python manage.py shell
 
+http://127.0.0.1:8000/bot_app/training_messages/Barack_Obama/
+http://127.0.0.1:8000/bot_app/training_messages/Barack%20Obama/
 
 things to install:
 
