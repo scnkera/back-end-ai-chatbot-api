@@ -1,0 +1,24 @@
+#nav-bar {
+    border-radius: 10px;
+    border: 2px solid #152237;
+    padding: 15px;
+    font-size: 25px;
+
+}
+
+body{
+    background-color: #152237
+}
+
+.container-fluid {
+    margin: 25px;
+    /* padding: 0px; */
+    background-color: #172841;
+    color: white;
+}
+
+footer {
+    border-top: 2px solid white;
+    font-size: 25px;
+    margin: 25px 500px 0px;
+}

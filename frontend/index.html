@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WitBot</title>
+    <!-- Google Icons link -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="httpsñ://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Framework Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Icon Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Favicon imagine link -->
+    <!-- <link rel="icon" type="image/x-icon" href="./static/faviconLogo.ico" /> -->
+    <!-- Link to Main Page Style Sheet -->
+
+    <link rel="stylesheet" type="text/css" href="./styles/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/carousel_style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/newStyles.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/std_style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav-bar">
+        <a class="navbar-brand" href="#">Witbot</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./pages/characters.html">Characters</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:8501/">Conversations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./pages/register.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <section>
+        <div class="row">
+          <div class="col text-center pt-5">
+            <h1>WELCOME TO WITBOT!</h1>
+          </div>
+        </div>
+        <div class="row char_img" id="wit_bot_logo">
+          <div class="col d-flex flex-column align-items-center text-center">
+              <img src="./static/bot_logo.png" class="img-fluid" alt="Responsive Image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column align-items-center text-center">
+            <h1>Sign In</h1>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="row text-center">
+            <h3>Sign In</h3>
+          </div>
+        </div>
+        <div class="row" id="characters_row_one">
+          <div class="col-3"></div>
+          <div class="col char_bubble d-flex flex-column align-items-center text-center" id="barack_o">
+              <h2>Username</h2>
+              <h4>44th President of the United States</h4>
+              <p>Hi, I’m Barack Obama. I had the honor of serving as the 44th President of the United States, where I worked to foster hope, change, and progress for all Americans. I believe in the power of community, the importance of unity, and that the future is shaped by what we do today. My journey has been about standing up for what’s right, making tough decisions, and striving to leave a world better than we found it.</p>
+              <div class="row spark_conv_botton">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" style="color: white;">Sign In</button>
+                </div>
+              </div>
+          </div>
+          <div class="col-3"></div>
+        </div> -->
+        <div class="row py-5" id="characters_row_one">
+          <div class="col-4"></div>
+          <div class="col char_bubble py-5">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            
+          </div>
+          <div class="col-4"></div>      
+        </div>
+
+      </section>
+
+
+      <footer class="text-center">
+        <p>Witbot</p>
+        <p>2024</p>
+      </footer>
+      <!-- end of main site container -->
+    </div>
+    <script src="./script/scipt.js"></script>
+    <script src="./script/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
