@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.http import Http404
 
+
 def index(request):
     return HttpResponse("This is my first URL")
 
@@ -145,8 +146,94 @@ def single_bot_response(request, response_id):
 
 
 # conversations
+# @api_view(['GET', 'POST'])
+# def conversations(request):
+#     if request.method == 'GET':
+#         conversations = Conversation.objects.all()
+#         serializer = ConversationSerializer(conversations, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     elif request.method == 'POST':
+#         serializer = ConversationSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# @api_view(['GET', 'DELETE'])
+# def single_conversation(request, conversation_id):
+#     conversation = get_object_or_404(Conversation, id=conversation_id)
+
+#     if request.method == 'GET':
+#         serializer = ConversationSerializer(conversation)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     elif request.method == 'DELETE':
+#         conversation.delete()
+#         return Response({'message': 'Conversation deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+#     def get_conversation_history(user, character):
+#     try:
+#         conversation = Conversation.objects.get(user=user, character=character)
+#         responses = BotResponse.objects.filter(conversation=conversation).order_by('created_at')
+        
+#         history = [
+#             {"user_input": resp.user_input, "bot_response": resp.response, "timestamp": resp.created_at}
+#             for resp in responses
+#         ]
+        
+#         return history
+#     except Conversation.DoesNotExist:
+#         return None 
+
+
+# @api_view(['POST'])
+# def save_bot_response(request, user_id, character_id):
+#     """Save a new user input and bot response into the conversation history"""
+#     user_input = request.data.get("user_input")
+#     bot_response = request.data.get("bot_response")
+
+#     if not user_input or not bot_response:
+#         return Response({"error": "Both user_input and bot_response are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+#     try:
+#         user = User.objects.get(id=user_id)
+#         character = Character.objects.get(id=character_id)
+#     except User.DoesNotExist:
+#         return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+#     except Character.DoesNotExist:
+#         return Response({"error": "Character not found."}, status=status.HTTP_404_NOT_FOUND)
+
+#     # Check if a conversation exists between the user and character, or create one
+#     conversation, created = Conversation.objects.get_or_create(user=user, character=character)
+
+#     training_message = TrainingMessage.objects.filter(
+#         character=character, user_input=user_input
+#     ).first()
+    
+#     if training_message is None:
+#         training_message = get_default_training_message()  # or simply None
+
+#     # # Try to find a matching TrainingMessage (optional)
+#     # training_message = TrainingMessage.objects.filter(character=character, user_input=user_input).first()
+#     # if not training_message:
+#     #     training_message = None  # Or set a default if necessary
+
+#     # Create and save the BotResponse entry
+#     bot_response_obj = BotResponse.objects.create(
+#         character=character,
+#         training_message=training_message,  # Could be None
+#         user_input=user_input,
+#         response=bot_response,
+#         conversation=conversation
+#     )
+
+#     return Response(BotResponseSerializer(bot_response_obj).data, status=status.HTTP_201_CREATED)
+
 @api_view(['POST'])
 def save_bot_response(request, user_id, character_id):
+    """Save a new user input and bot response into the conversation history"""
     user_input = request.data.get("user_input")
     bot_response = request.data.get("bot_response")
 
@@ -161,20 +248,20 @@ def save_bot_response(request, user_id, character_id):
     except Character.DoesNotExist:
         return Response({"error": "Character not found."}, status=status.HTTP_404_NOT_FOUND)
 
-
+    # Check if a conversation exists between the user and character, or create one
     conversation, created = Conversation.objects.get_or_create(user=user, character=character)
 
-
+    # Retrieve the TrainingMessage based on user_input and character
     training_message = TrainingMessage.objects.filter(
         character=character, user_input=user_input
     ).first()
     
-
+    # If no matching training_message, use default or None
     if not training_message:
+        # Use a function to get default message or just set to None
+        training_message = get_default_training_message()  # You can modify this function to return a default message or None.
 
-        training_message = get_default_training_message() 
-
-
+    # Create and save the BotResponse entry
     bot_response_obj = BotResponse.objects.create(
         character=character,
         training_message=training_message,  
@@ -191,13 +278,27 @@ def conversation_history(request, user_id, character_id):
     user = get_object_or_404(User, id=user_id)
     character = get_object_or_404(Character, id=character_id)
 
-
+    # Get the conversation
     conversation = Conversation.objects.filter(user=user, character=character).first()
     if not conversation:
         return Response({"message": "No conversation history found."}, status=status.HTTP_200_OK)
 
-
+    # Get all bot responses tied to this conversation
     bot_responses = BotResponse.objects.filter(conversation=conversation).order_by("created_at")
     
     serializer = BotResponseSerializer(bot_responses, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+# URLS
+
+    # path('conversations/', views.conversations, name='conversations-list'),
+    # path('conversations/<int:conversation_id>/', views.single_conversation, name='conversations-detail'),
+
+# OLD MODELS
+
+    # training_message = models.ForeignKey(
+    #     TrainingMessage, on_delete=models.CASCADE, default=get_default_training_message
+    # )  # Prevents null values

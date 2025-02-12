@@ -72,9 +72,7 @@ def get_default_training_message():
 
 class BotResponse(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
-    training_message = models.ForeignKey(
-        TrainingMessage, on_delete=models.CASCADE, default=get_default_training_message
-    )  # Prevents null values
+    training_message = models.ForeignKey(TrainingMessage, null=True, blank=True, on_delete=models.SET_NULL)
     user_input = models.TextField(blank=True, null=True)
     response = models.TextField()
     conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name='responses', default=get_default_conversation)
