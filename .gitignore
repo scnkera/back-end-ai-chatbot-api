@@ -1,6 +1,5 @@
 witbotProject/__pycache__
 temp_folder
-streamlit_app
 
 .vscode
 .DS_Store
@@ -9,6 +8,7 @@ streamlit_app
 __pycache__/
 *.py[cod]
 *$py.class
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
