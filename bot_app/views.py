@@ -22,7 +22,12 @@ def users(request):
     elif request.method == 'POST':
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            user = serializer.save() 
+            characters = Character.objects.all()
+
+            for character in characters:
+                Conversation.objects.get_or_create(user=user, character=character)
+
             return Response({'message': 'User profile created successfully!', 'user': serializer.data}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -144,7 +149,35 @@ def single_bot_response(request, response_id):
         return Response({'message': 'Bot response deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
-# conversations
+# conversations: data for conversation pairs
+@api_view(['GET', 'POST'])
+def conversations(request):
+    if request.method == 'GET':
+        conversations = Conversation.objects.all()
+        serializer = ConversationSerializer(conversations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        serializer = ConversationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'DELETE'])
+def single_conversation(request, conversation_id):
+    conversation = get_object_or_404(Conversation, id=conversation_id)
+
+    if request.method == 'GET':
+        serializer = ConversationSerializer(conversation)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'DELETE':
+        conversation.delete()
+        return Response({'message': 'Conversation deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+# conversations: data for conversation histories
 @api_view(['POST'])
 def save_bot_response(request, user_id, character_id):
     user_input = request.data.get("user_input")
@@ -161,19 +194,15 @@ def save_bot_response(request, user_id, character_id):
     except Character.DoesNotExist:
         return Response({"error": "Character not found."}, status=status.HTTP_404_NOT_FOUND)
 
-
     conversation, created = Conversation.objects.get_or_create(user=user, character=character)
-
 
     training_message = TrainingMessage.objects.filter(
         character=character, user_input=user_input
     ).first()
     
-
     if not training_message:
 
         training_message = get_default_training_message() 
-
 
     bot_response_obj = BotResponse.objects.create(
         character=character,
@@ -182,9 +211,8 @@ def save_bot_response(request, user_id, character_id):
         response=bot_response,
         conversation=conversation
     )
-
+    
     return Response(BotResponseSerializer(bot_response_obj).data, status=status.HTTP_201_CREATED)
-
 
 @api_view(['GET'])
 def conversation_history(request, user_id, character_id):
@@ -195,7 +223,6 @@ def conversation_history(request, user_id, character_id):
     conversation = Conversation.objects.filter(user=user, character=character).first()
     if not conversation:
         return Response({"message": "No conversation history found."}, status=status.HTTP_200_OK)
-
 
     bot_responses = BotResponse.objects.filter(conversation=conversation).order_by("created_at")
     

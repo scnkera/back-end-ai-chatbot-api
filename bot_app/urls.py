@@ -23,7 +23,8 @@ urlpatterns = [
     path('bot_responses/<int:response_id>/', views.single_bot_response, name='bot_responses-detail'),
 
     # Conversation
-
-    path('conversation/<int:user_id>/<int:character_id>/save/', views.save_bot_response, name='save_bot_response'),
-    path('conversation/<int:user_id>/<int:character_id>/', views.conversation_history, name='conversation_history'),
+    path('conversations/', views.conversations, name='conversations-list'),
+    path('conversations/<int:conversation_id>/', views.single_conversation, name='conversations-detail'),
+    path('conversations/<int:user_id>/<int:character_id>/save/', views.save_bot_response, name='save_bot_response'),
+    path('conversations/<int:user_id>/<int:character_id>/', views.conversation_history, name='conversation_history'),
 ]

@@ -5,9 +5,11 @@ from .models import User, Character, BotResponse, TrainingMessage, Conversation
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'created_at']
+        fields = ['id', 'username', 'first_name', 'last_name', 'password', 'created_at']
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'first_name': {'required': False, 'allow_null': True},
+            'last_name': {'required': False, 'allow_null': True}
         }
 
     def create(self, validated_data):

@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password
 
 class User(models.Model):
     username = models.CharField(max_length=25, unique=True)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
     password = models.CharField(max_length=255, blank=True, null=True)
     characters = models.ManyToManyField('Character', related_name='users')
     created_at = models.DateTimeField(default=now)

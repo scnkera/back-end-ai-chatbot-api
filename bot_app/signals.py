@@ -7,7 +7,6 @@ import json
 
 DEFAULT_USERNAME = "system_user"
 DEFAULT_CHARACTER_NAME = "Neutral Character"
-# TRAINED_MSG_DIR = os.path.join(os.path.dirname(__file__), "trained_msg")
 TRAINED_MSG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "trained_msg"))
 
 # Helper Functions
@@ -36,19 +35,23 @@ def create_default_data(sender, **kwargs):
     if sender.name != "bot_app":
         return 
 
-    # creates system user
+    # Create system user
     system_user, _ = User.objects.get_or_create(
         username=DEFAULT_USERNAME,
-        defaults={"password": make_password("default_password")}
+        defaults={
+            "password": make_password("default_password"),
+            "first_name": "System",
+            "last_name": "User"
+        }
     )
 
-    # creates neutral character
     neutral_character, _ = Character.objects.get_or_create(
         name=DEFAULT_CHARACTER_NAME,
         defaults={"title": "Default title", "biography": "Default character for system messages."}
     )
 
-    # creates celebrity characters and their training messages
+    _, created = Conversation.objects.get_or_create(user=system_user, character=neutral_character)
+
     characters = load_character_metadata()
 
     for character_data in characters:
@@ -68,5 +71,5 @@ def create_default_data(sender, **kwargs):
                 response=message.get("response", "")
             )
 
-    # create a default conversation for the system user
-    Conversation.objects.get_or_create(user=system_user, character=neutral_character)
+        if character.name != DEFAULT_CHARACTER_NAME:
+            Conversation.objects.get_or_create(user=system_user, character=character)
